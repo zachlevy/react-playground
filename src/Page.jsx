@@ -6,7 +6,7 @@ const pageContent = {
   body: "content content content \n great content"
 }
 
-export class Page extends React.Component {
+export default class Page extends React.Component {
   render () {
     return (
       <div>

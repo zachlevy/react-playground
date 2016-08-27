@@ -1,28 +1,29 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './index.css';
 import React from 'react';
 import { render } from 'react-dom';
-import { NavBar } from "./NavBar"
-import { Page } from "./Page"
+import NavBar from "./NavBar"
+import Page from "./Page"
+import ThemeSelector from "./ThemeSelector"
 
-
-const blueTheme = {
-  primaryColor: "darkblue",
-  secondaryColor: "blue",
-  tertiaryColor: "lightblue"
-}
-const redTheme = {
-  primaryColor: "darkred",
-  secondaryColor: "red",
-  tertiaryColor: "lightred"
-}
-
+const themes = [
+  {
+    name: "Red",
+    primaryColor: "darkred",
+    secondaryColor: "red",
+    tertiaryColor: "lightred"
+  }, {
+    name: "Blue",
+    primaryColor: "darkblue",
+    secondaryColor: "blue",
+    tertiaryColor: "lightblue"
+  }
+]
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      theme: blueTheme,
+      theme: themes[0],
       name: "Joe"
     }
   }
@@ -31,21 +32,16 @@ class App extends React.Component {
     .then(response => response.json())
     .then(data => console.log(data))
   }
-  handleChangeTheme() {
-    this.changeTheme()
-  }
-  changeTheme() {
-    this.setState({
-      theme: redTheme
-    })
-  }
+
   render() {
     return (
       <div>
+        <ThemeSelector themes={themes} />
         <NavBar />
-        <Page />
-        <h1 style={{color: this.state.theme.primaryColor}}>It Works! {this.state.name}</h1>
-        <p><a className="btn btn-primary btn-lg" onClick={this.handleChangeTheme.bind(this)}>ChangeTheme</a></p>
+        <div className="container">
+          <h1 style={{color: this.state.theme.primaryColor}}>It Works! {this.state.name}</h1>
+          <Page />
+        </div>
       </div>
     )
   }
