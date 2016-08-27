@@ -32,7 +32,7 @@ class App extends React.Component {
     .then(response => response.json())
     .then(data => console.log(data))
   }
-  handleChangeThemeIndex(theme) {
+  handleChangeTheme(theme) {
     this.setState({
       theme: theme
     })
@@ -40,7 +40,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <ThemeSelector themes={themes} handleChangeThemeIndex={this.handleChangeThemeIndex.bind(this)}/>
+        <ThemeSelector themes={themes} handleChangeTheme={this.handleChangeTheme.bind(this)}/>
         <NavBar />
         <div className="container">
           <h1 style={{color: this.state.theme.primaryColor}}>It Works! {this.state.name}</h1>
