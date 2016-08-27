@@ -32,11 +32,15 @@ class App extends React.Component {
     .then(response => response.json())
     .then(data => console.log(data))
   }
-
+  handleChangeThemeIndex(theme) {
+    this.setState({
+      theme: theme
+    })
+  }
   render() {
     return (
       <div>
-        <ThemeSelector themes={themes} />
+        <ThemeSelector themes={themes} handleChangeThemeIndex={this.handleChangeThemeIndex.bind(this)}/>
         <NavBar />
         <div className="container">
           <h1 style={{color: this.state.theme.primaryColor}}>It Works! {this.state.name}</h1>
