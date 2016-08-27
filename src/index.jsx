@@ -3,6 +3,7 @@ import styles from './index.css';
 import React from 'react';
 import { render } from 'react-dom';
 import { NavBar } from "./NavBar"
+import { Page } from "./Page"
 
 
 const blueTheme = {
@@ -42,9 +43,8 @@ class App extends React.Component {
     return (
       <div>
         <NavBar />
+        <Page />
         <h1 style={{color: this.state.theme.primaryColor}}>It Works! {this.state.name}</h1>
-        <p>This React project just works including <span className={styles.blueBg}>module</span> local styles.</p>
-        <p>Global bootstrap css import works too as you can see on the following button.</p>
         <p><a className="btn btn-primary btn-lg" onClick={this.handleChangeTheme.bind(this)}>ChangeTheme</a></p>
       </div>
     )
