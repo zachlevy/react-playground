@@ -2,22 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import NavItem from "./NavItem"
 
-const navs = [
-  {
-    text: "Home",
-    url: "/#/"
-  },{
-    text: "Services",
-    url: "/#/services"
-  },{
-    text: "About",
-    url: "/#/about"
-  },{
-    text: "Home",
-    url: "/#/contact"
-  }
-]
-
 export default class NavBar extends React.Component {
   render () {
     return (
@@ -34,7 +18,7 @@ export default class NavBar extends React.Component {
           </div>
           <div id="navbar" className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
-              {navs.map(function(nav, index) {
+              {this.props.content.map(function(nav, index) {
                  return <NavItem key={index} data={nav}/>;
               })}
             </ul>

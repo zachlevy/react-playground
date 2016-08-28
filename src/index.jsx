@@ -104,7 +104,7 @@ class App extends React.Component {
     return (
       <div className={this.state.theme.slug}>
         <ThemeSelector themes={themes} handleChangeTheme={this.handleChangeTheme.bind(this)} handleChangeSidebar={this.handleChangeSidebar.bind(this)}/>
-        <NavBar />
+        <NavBar content={content}/>
         <div className="container">
           <Page content={this.state.content} sidebar={this.state.sidebar}/>
         </div>
