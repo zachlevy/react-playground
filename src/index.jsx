@@ -71,7 +71,8 @@ class App extends React.Component {
     super(props)
     this.state = {
       theme: themes[0],
-      content: content[2]
+      content: content[2],
+      sidebar: "left"
     }
   }
   // componentDidMount() {
@@ -94,13 +95,18 @@ class App extends React.Component {
       theme: theme
     })
   }
+  handleChangeSidebar(side) {
+    this.setState({
+      sidebar: side
+    })
+  }
   render() {
     return (
       <div className={this.state.theme.slug}>
-        <ThemeSelector themes={themes} handleChangeTheme={this.handleChangeTheme.bind(this)}/>
+        <ThemeSelector themes={themes} handleChangeTheme={this.handleChangeTheme.bind(this)} handleChangeSidebar={this.handleChangeSidebar.bind(this)}/>
         <NavBar />
         <div className="container">
-          <Page content={this.state.content} />
+          <Page content={this.state.content} sidebar={this.state.sidebar}/>
         </div>
       </div>
     )
