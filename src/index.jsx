@@ -71,30 +71,24 @@ class App extends React.Component {
     super(props)
     this.state = {
       theme: themes[0],
-      name: "Joe",
-      content: {
-        about: {
-          title: "Services",
-          body: "content content content \n great content"
-        }
-      }
+      content: content[2]
     }
   }
-  componentDidMount() {
-    fetch("http://jsonplaceholder.typicode.com/posts/1")
-    .then(response => response.json())
-    .then(data => {
-      this.setState({
-        content: {
-          about: {
-            title: data.title,
-            body: data.body
-          }
-        }
-      })
-      console.log(data)
-    })
-  }
+  // componentDidMount() {
+  //   fetch("http://jsonplaceholder.typicode.com/posts/1")
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     this.setState({
+  //       content: {
+  //         about: {
+  //           title: data.title,
+  //           body: data.body
+  //         }
+  //       }
+  //     })
+  //     console.log(data)
+  //   })
+  // }
   handleChangeTheme(theme) {
     this.setState({
       theme: theme
@@ -106,8 +100,7 @@ class App extends React.Component {
         <ThemeSelector themes={themes} handleChangeTheme={this.handleChangeTheme.bind(this)}/>
         <NavBar />
         <div className="container">
-          <h1>It Works! {this.state.name}</h1>
-          <Page content={this.state.content.about} />
+          <Page content={this.state.content} />
         </div>
       </div>
     )
