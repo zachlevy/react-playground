@@ -1,0 +1,20 @@
+.blueBg {
+	background-color: blue;
+	color: white;
+}
+body {
+	padding-top: 50px;
+}
+.theme-red h1 {
+	color: red
+}
+.theme-blue h1 {
+	color: blue
+}
+.theme-blue p {
+	color: darkblue
+}
+
+.theme-red p {
+	color: darkred
+}
