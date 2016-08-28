@@ -26,6 +26,46 @@ const pageContent = {
   body: "content content content \n great content"
 }
 
+const content = [
+  {
+    id: 1,
+    slug: "about",
+    menu: "About",
+    title: "About Us",
+    body: "Our company was founded in 2015"
+  }, {
+    id: 2,
+    slug: "contact",
+    menu: "Contact",
+    title: "Contact Us",
+    body: "Feel free to contact us",
+    form: {
+      mailto: "zacharyalevy+dev@gmail.com",
+      subject: true,
+      body: true,
+      button: "Send"
+    }
+  }, {
+    id: 3,
+    slug: "services",
+    menu: "Services",
+    title: "Services",
+    body: [
+      {
+        id: 4,
+        slug: "investment-advice",
+        title: "Investment Advice",
+        body: "We'll give you the best advice for real."
+      },{
+        id: 5,
+        slug: "year-end-accounting",
+        title: "Year End Accounting",
+        body: "Don't worry about a thing, just ring your accountant."
+      }
+    ]
+  }
+]
+
 class App extends React.Component {
   constructor(props) {
     super(props)
