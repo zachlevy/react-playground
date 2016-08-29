@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import NavBar from "./NavBar"
 import Page from "./Page"
 import ThemeSelector from "./ThemeSelector"
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 
 const themes = [
   {
@@ -72,7 +73,7 @@ class App extends React.Component {
     }
   }
   componentWillMount() {
-    fetch("http://localhost:3000/contents")
+    fetch("http://localhost:3000/pages")
     .then(response => response.json())
     .then(data => {
       console.log(data)
@@ -105,7 +106,7 @@ class App extends React.Component {
         <ThemeSelector themes={themes} handleChangeTheme={this.handleChangeTheme.bind(this)} handleChangeSidebar={this.handleChangeSidebar.bind(this)}/>
         <NavBar content={this.state.content}/>
         <div className="container">
-          <Page content={this.state.content[2]} sidebar={this.state.sidebar}/>
+          {this.props.children}
         </div>
       </div>
     )
@@ -113,4 +114,12 @@ class App extends React.Component {
 
 }
 
-render(<App/>, document.querySelector("#app"));
+render((
+  <Router history={hashHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={Page} />
+      <Route path="pages/:id" component={Page} sidebar="left"/>
+    </Route>
+  </Router>
+), document.querySelector("#app"))
+// render(<App/>, document.querySelector("#app"));

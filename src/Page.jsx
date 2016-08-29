@@ -5,13 +5,33 @@ import Subpage from "./Subpage"
 
 
 export default class Page extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      content: {
+        body: null,
+        title: null
+      }
+    }
+  }
+  componentWillReceiveProps(newProps) {
+    const id = newProps.params.id
+    fetch("http://localhost:3000/pages/" + id)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      this.setState({
+        content: data
+      })
+    })
+  }
   render () {
     // if subpages
-    if (Array.isArray(this.props.content.body)) {
+    if (Array.isArray(this.state.content.body)) {
       // set up main and sidebar
       let main = (
         <div className="col-xs-12 col-sm-8">
-          {this.props.content.body.map(function(subpage, index) {
+          {this.state.content.body.map(function(subpage, index) {
              return <Subpage key={subpage.slug} content={subpage} />
           })}
         </div>
@@ -19,7 +39,7 @@ export default class Page extends React.Component {
       let sidebar = (
         <div className="col-xs-12 col-sm-4">
           <ul>
-            {this.props.content.body.map(function(subpage, index) {
+            {this.state.content.body.map(function(subpage, index) {
                return <li key={subpage.slug}>{subpage.title}</li>
             })}
           </ul>
@@ -43,11 +63,15 @@ export default class Page extends React.Component {
     } else {
       return (
         <div>
-          <h1>{this.props.content.title}</h1>
-          <p>{this.props.content.body}</p>
+          <h1>{this.state.content.title}</h1>
+          <p>{this.state.content.body}</p>
         </div>
       )
     }
 
   }
 }
+
+// Page.defaultProps = {
+//   sidebar: "left"
+// }
