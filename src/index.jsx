@@ -106,7 +106,7 @@ class App extends React.Component {
         <ThemeSelector themes={themes} handleChangeTheme={this.handleChangeTheme.bind(this)} handleChangeSidebar={this.handleChangeSidebar.bind(this)}/>
         <NavBar content={this.state.content}/>
         <div className="container">
-          {this.props.children}
+          {React.cloneElement(this.props.children, {sidebar: this.state.sidebar})}
         </div>
       </div>
     )
@@ -118,8 +118,7 @@ render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Page} />
-      <Route path="pages/:id" component={Page} sidebar="left"/>
+      <Route path="pages/:id" component={Page} />
     </Route>
   </Router>
 ), document.querySelector("#app"))
-// render(<App/>, document.querySelector("#app"));
