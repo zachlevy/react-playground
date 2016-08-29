@@ -21,10 +21,6 @@ const themes = [
   }
 ]
 
-const pageContent = {
-  title: "Services",
-  body: "content content content \n great content"
-}
 
 const content = [
   {
@@ -71,25 +67,28 @@ class App extends React.Component {
     super(props)
     this.state = {
       theme: themes[0],
-      content: content[2],
+      content: content,
       sidebar: "left"
     }
   }
-  // componentDidMount() {
-  //   fetch("http://jsonplaceholder.typicode.com/posts/1")
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     this.setState({
-  //       content: {
-  //         about: {
-  //           title: data.title,
-  //           body: data.body
-  //         }
-  //       }
-  //     })
-  //     console.log(data)
-  //   })
-  // }
+  componentWillMount() {
+    fetch("http://localhost:3000/contents")
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      this.setState({
+        content: data
+      })
+    })
+    fetch("http://localhost:3000/themes")
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      this.setState({
+        themes: data
+      })
+    })
+  }
   handleChangeTheme(theme) {
     this.setState({
       theme: theme
@@ -104,9 +103,9 @@ class App extends React.Component {
     return (
       <div className={this.state.theme.slug}>
         <ThemeSelector themes={themes} handleChangeTheme={this.handleChangeTheme.bind(this)} handleChangeSidebar={this.handleChangeSidebar.bind(this)}/>
-        <NavBar content={content}/>
+        <NavBar content={this.state.content}/>
         <div className="container">
-          <Page content={this.state.content} sidebar={this.state.sidebar}/>
+          <Page content={this.state.content[2]} sidebar={this.state.sidebar}/>
         </div>
       </div>
     )
