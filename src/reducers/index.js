@@ -1,10 +1,10 @@
-export default (state = {}, action) => {
-  switch (action.type) {
-    case 'SET_THEME':
-      return {
-        theme: action.theme
-      }
-    default:
-      return state
-  }
-}
+import { combineReducers } from 'redux'
+import layout from './layout'
+import theme from './theme'
+
+const designApp = combineReducers({
+  layout,
+  theme
+})
+
+export default designApp
