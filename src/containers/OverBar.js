@@ -6,9 +6,23 @@ const mapStateToProps = (state, ownProps) => ({
   theme: state.theme
 })
 
+
+
 let OverBar = ({ theme, dispatch }) => {
 
   let input
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault()
+    if (!input.value.trim()) {
+      return
+    }
+    dispatch(setTheme(input.value))
+    console.log("switch theme with query")
+    document.querySelector('body').className = `theme-${input.value}`
+    document.querySelector('html').className = `theme-${input.value}`
+    input.value = ''
+  }
 
   return (
     <nav className="navbar navbar-inverse navbar-fixed-top">
@@ -23,28 +37,22 @@ let OverBar = ({ theme, dispatch }) => {
           <a className="navbar-brand" href="#">Dice</a>
         </div>
         <div id="navbar" className="collapse navbar-collapse">
-          <ul className="nav navbar-nav">
-            <div className="active">
-              <form onSubmit={e => {
-                e.preventDefault()
-                if (!input.value.trim()) {
-                  return
-                }
-                dispatch(setTheme(input.value))
-                console.log("switch theme with query")
-                document.querySelector('body').className = `theme-${input.value}`
-                document.querySelector('html').className = `theme-${input.value}`
-                input.value = ''
-              }}>
-                <input ref={node => {
-                  input = node
-                }} />
-                <button className="btn btn-primary btn-xs" type="submit">
-                  Set Theme
-                </button>
-              </form>
-            </div>
-          </ul>
+          <div className="form-group">
+            <form className="navbar-form" onSubmit={handleOnSubmit}>
+              <ul className="nav navbar-nav">
+                <li>
+                  <input className="form-control" ref={node => {
+                    input = node
+                  }} />
+                </li>
+                <li>
+                  <button className="btn btn-primary" type="submit">
+                    Set Theme
+                  </button>
+                </li>
+              </ul>
+            </form>
+          </div>
         </div>
       </div>
     </nav>
