@@ -22,7 +22,7 @@ const templates = [
     )
   }, {
     name: "sidebar-left",
-    countents: 2,
+    contents: 2,
     template: (
       <div className="row">
         <div className="col-xs-12 col-sm-4">
